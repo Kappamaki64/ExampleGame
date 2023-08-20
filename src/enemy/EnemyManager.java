@@ -38,10 +38,11 @@ public class EnemyManager {
   }
 
   public void update(Optional<Predicate<Enemy>> filter, int newLevel) {
-    Collection<Enemy> enemiesToUpdate = filter.isPresent()
-        ? enemyMap.values().stream().filter(filter.get())
-            .collect(Collectors.toList())
-        : enemyMap.values();
+    Collection<Enemy> enemiesToUpdate = enemyMap.values();
+    if (filter.isPresent()) {
+      enemiesToUpdate = enemyMap.values().stream().filter(filter.get())
+          .collect(Collectors.toList());
+    }
     enemiesToUpdate.forEach((enemy) -> enemy.update());
 
     if (level == newLevel)
