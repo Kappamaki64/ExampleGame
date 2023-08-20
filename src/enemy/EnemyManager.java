@@ -38,28 +38,32 @@ public class EnemyManager {
   }
 
   public void update(Optional<Predicate<Enemy>> filter, int newLevel) {
-    Collection<Enemy> enemiesToUpdate = filter.isPresent()
-        ? enemyMap.values().stream().filter(filter.get())
-            .collect(Collectors.toList())
-        : enemyMap.values();
+    Collection<Enemy> enemiesToUpdate = enemyMap.values();
+    if (filter.isPresent()) {
+      enemiesToUpdate = enemyMap.values().stream().filter(filter.get())
+          .collect(Collectors.toList());
+    }
     enemiesToUpdate.forEach((enemy) -> enemy.update());
 
-    if (level != newLevel) {
-      level = newLevel;
+    if (level == newLevel)
+      return;
+    level = newLevel;
 
-      int sizeX = 1;
-      for (int i = 1; i < Math.sqrt(newLevel); i++) {
-        if (newLevel % i == 0)
-          sizeX = i;
-      }
-      int sizeY = newLevel / sizeX;
-      for (int i = 0; i < newLevel; i++) {
-        int countX = i / sizeX;
-        int countY = i % sizeX;
-        double x = (width / 2) / sizeX * countX;
-        double y = height / sizeY * countY;
-        addEnemy(new Position(x, y));
-      }
+    int sizeX = Utils.calcSizeX(newLevel);
+    int sizeY = newLevel / sizeX;
+    for (int i = 0; i < newLevel; i++) {
+      int countX = i / sizeX;
+      int countY = i % sizeX;
+      double x = (width / 2) / sizeX * countX;
+      double y = height / sizeY * countY;
+      addEnemy(new Position(x, y));
     }
+
+    if (newLevel % 5 != 0)
+      return;
+    // Add Boss Enemy
+    String id = Utils.createNewId();
+    Position position = Utils.createRandomPosition(width / 2, height);
+    enemyMap.put(id, new BossEnemy(id, position));
   }
 }
