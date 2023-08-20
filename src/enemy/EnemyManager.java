@@ -49,11 +49,7 @@ public class EnemyManager {
       return;
     level = newLevel;
 
-    int sizeX = 1;
-    for (int i = 1; i < Math.sqrt(newLevel); i++) {
-      if (newLevel % i == 0)
-        sizeX = i;
-    }
+    int sizeX = Utils.calcSizeX(newLevel);
     int sizeY = newLevel / sizeX;
     for (int i = 0; i < newLevel; i++) {
       int countX = i / sizeX;
