@@ -16,7 +16,7 @@ public class Utils {
 
   public static int calcSizeX(int newLevel) {
     int sizeX = 1;
-    for (int i = 1; i < Math.sqrt(newLevel); i++) {
+    for (int i = 1; i <= Math.sqrt(newLevel); i++) {
       if (newLevel % i == 0)
         sizeX = i;
     }
