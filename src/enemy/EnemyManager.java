@@ -58,5 +58,12 @@ public class EnemyManager {
       double y = height / sizeY * countY;
       addEnemy(new Position(x, y));
     }
+
+    if (newLevel % 5 != 0)
+      return;
+    // Add Boss Enemy
+    String id = Utils.createNewId();
+    Position position = Utils.createRandomPosition(width / 2, height);
+    enemyMap.put(id, new BossEnemy(id, position));
   }
 }
