@@ -1,3 +1,5 @@
+package enemy;
+
 import util.Position;
 
 public class Enemy {
