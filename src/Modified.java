@@ -1,9 +1,9 @@
 /**
  * [add]
+ * this line was added
  * [modify]
- * this line will be modified
+ * this line was modified
  * [remove]
- * this line will be removed
  * 
  * above comments will be modified
  */
@@ -12,9 +12,9 @@ class Modify {
 
     public static void main(String[] args) {
         // add
+        System.out.println("this line was added");
         // modify
-        System.out.println("this line will be modified");
+        System.out.println("this line was modified");
         // remove
-        System.out.println("this line will be removed");
     }
 }
