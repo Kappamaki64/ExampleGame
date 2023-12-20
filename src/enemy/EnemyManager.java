@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import util.Direction;
 import util.Position;
 import util.Utils;
 
@@ -25,12 +26,12 @@ public class EnemyManager {
     return enemyMap.values();
   }
 
-  public Enemy addEnemy(Position position) {
+  public Enemy addEnemy(Position position, Direction direction) {
     String id = Utils.createNewId();
     if (position == null) {
       position = Utils.createRandomPosition(width, height);
     }
-    return enemyMap.put(id, new Enemy(id, position));
+    return enemyMap.put(id, new Enemy(id, position, direction));
   }
 
   public Enemy removeEnemy(String id) {
@@ -59,8 +60,10 @@ public class EnemyManager {
       int countY = i % sizeX;
       double x = (width / 2) / sizeX * countX;
       double y = height / sizeY * countY;
+      double theta = (y - (height / 2)) / (height / 2) * 45
       Position position = new Position(x, y);
-      addEnemy(position);
+      Direction direction = new Direction(theta);
+      addEnemy(position, direction);
     }
   }
 }
