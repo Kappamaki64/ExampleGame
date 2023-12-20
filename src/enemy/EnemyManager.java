@@ -59,7 +59,8 @@ public class EnemyManager {
       int countY = i % sizeX;
       double x = (width / 2) / sizeX * countX;
       double y = height / sizeY * countY;
-      addEnemy(new Position(x, y));
+      Position position = new Position(x, y);
+      addEnemy(position);
     }
   }
 }
