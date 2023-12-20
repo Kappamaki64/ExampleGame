@@ -44,22 +44,22 @@ public class EnemyManager {
         : enemyMap.values();
     enemiesToUpdate.forEach((enemy) -> enemy.update());
 
-    if (level != newLevel) {
-      level = newLevel;
+    if (level == newLevel) return;
+    
+    level = newLevel;
 
-      int sizeX = 1;
-      for (int i = 1; i < Math.sqrt(newLevel); i++) {
-        if (newLevel % i == 0)
-          sizeX = i;
-      }
-      int sizeY = newLevel / sizeX;
-      for (int i = 0; i < newLevel; i++) {
-        int countX = i / sizeX;
-        int countY = i % sizeX;
-        double x = (width / 2) / sizeX * countX;
-        double y = height / sizeY * countY;
-        addEnemy(new Position(x, y));
-      }
+    int sizeX = 1;
+    for (int i = 1; i < Math.sqrt(newLevel); i++) {
+      if (newLevel % i == 0)
+        sizeX = i;
+    }
+    int sizeY = newLevel / sizeX;
+    for (int i = 0; i < newLevel; i++) {
+      int countX = i / sizeX;
+      int countY = i % sizeX;
+      double x = (width / 2) / sizeX * countX;
+      double y = height / sizeY * countY;
+      addEnemy(new Position(x, y));
     }
   }
 }
